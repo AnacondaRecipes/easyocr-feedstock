@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vvv                                     # [pytorch_variant == "cpu"]
+  script: {{ PYTHON }} -m pip install . -vvv
   entry_points:
     - easyocr= easyocr.cli:main
 
