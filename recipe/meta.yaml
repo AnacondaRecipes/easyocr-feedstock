@@ -22,9 +22,11 @@ requirements:
     - pip
     - setuptools
     - wheel
+    - numpy   1.19  # [py<310]
+    - numpy   1.21  # [py>=310]
   run:
     - ninja
-    - numpy
+    - {{ pin_compatible('numpy') }}
     - pillow
     - py-opencv
     - pyclipper
