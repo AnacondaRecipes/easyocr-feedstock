@@ -22,8 +22,6 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - numpy   1.19  # [py<310]
-    - numpy   1.21  # [py>=310]
   run:
     - ninja
     - {{ pin_compatible('numpy') }}
@@ -45,15 +43,12 @@ test:
   requires:
     - pip
     - ninja
-    # 2022/9/29: Fix for scipy 1.7.3:
-    - numpy <1.23
+  files:
+    - english.png
   commands:
-    # 2022/9/29: To pass pip check opencv-python-headless<=4.5.4.60 and ninja are needed.
-    # It's weird that ninja is needed because it's already in run and test/requires.
-    # opencv-python-headless is needed only for tests, in run is used py-opencv.
-    - pip install ninja "opencv-python-headless<=4.5.4.60"
-    - pip check
-    - easyocr --help
+    - run_test.sh   # [not win]
+    - run_test.bat  # [win]
+    - run_test.py
 
 about:
   home: https://www.jaided.ai/
