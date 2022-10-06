@@ -45,11 +45,11 @@ test:
     - easyocr
   requires:
     - pip
+    - qtwebkit >=5.212  # [linux64]
   files:
     - english.png
   commands:
     - run_test.sh   # [not win]
-    - run_test.bat  # [win]
     - run_test.py   # [not win]
 
 about:
