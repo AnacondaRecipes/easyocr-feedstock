@@ -45,7 +45,6 @@ test:
     - easyocr
   requires:
     - pip
-    - qtwebkit >=5.212  # [linux64]
   files:
     - english.png
   commands:
