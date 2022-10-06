@@ -45,7 +45,6 @@ test:
     - easyocr
   requires:
     - pip
-    - ninja
   files:
     - english.png
   commands:

@@ -5,6 +5,7 @@
 :: opencv-python-headless is needed only for tests, in run is used py-opencv.
 ::- pip install ninja "opencv-python-headless<=4.5.4.60"
 %PYTHON% -m pip check || (exit 1)
+
 easyocr --help
 
 :: Error free exit.
