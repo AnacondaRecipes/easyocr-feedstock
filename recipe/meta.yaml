@@ -11,7 +11,8 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<37]
+  # torchvision currently isn't available on s390x and ppc64le
+  skip: True  # [py<37 or s390x or ppc64le]
   script: {{ PYTHON }} -m pip install . -vvv
   entry_points:
     - easyocr= easyocr.cli:main
