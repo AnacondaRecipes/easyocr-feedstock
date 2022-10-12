@@ -56,14 +56,14 @@ about:
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  license_file:
+  license_url: https://github.com/JaidedAI/EasyOCR/blob/master/LICENSE
   summary: End-to-End Multi-Lingual Optical Character Recognition (OCR) Solution
   description: |
     Ready-to-use OCR with 80+ supported languages and all popular writing
     scripts including: Latin, Chinese, Arabic, Devanagari, Cyrillic, etc.
 
   doc_url: https://github.com/JaidedAI/EasyOCR/blob/master/README.md
-  dev_url: https://github.com/jaidedai/easyocr
+  dev_url: https://github.com/JaidedAI/EasyOCR
 
 extra:
   recipe-maintainers:
