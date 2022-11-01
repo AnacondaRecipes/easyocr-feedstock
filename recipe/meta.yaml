@@ -29,7 +29,9 @@ requirements:
     - ninja
     - numpy
     - pillow
-    - py-opencv
+    - opencv >=4.6.0  # [(linux and x86_64) or (osx and x86_64)]
+    - py-opencv  # [not ((linux and x86_64) or (osx and x86_64))]
+    - py-opencv >=4.6.0  # [(linux and x86_64) or (osx and x86_64)]
     - pyclipper
     - python
     - python-bidi
@@ -37,7 +39,8 @@ requirements:
     - scikit-image
     - scipy
     - shapely
-    - pytorch
+    - pytorch  # [not ((linux and x86_64) or (osx and x86_64))]
+    - pytorch ==1.10.2  # [(linux and x86_64) or (osx and x86_64)]
     - torchvision >=0.5
 
 test:
