@@ -13,13 +13,20 @@ build:
   number: 0
   # torchvision currently isn't available on s390x and ppc64le
   skip: True  # [s390x or ppc64le]
-  # The current pytorch 1.10.2 causes errors using python 3.10, see https://github.com/pytorch/pytorch/issues/69911
-  skip: True  # [py<37 or py>39]
+  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . -vvv
   entry_points:
     - easyocr= easyocr.cli:main
 
 requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}  # [linux]
+    - {{ cdt('libxdamage') }}  # [linux]
+    - {{ cdt('libxxf86vm') }}  # [linux]
+    - {{ cdt('libxext') }}     # [linux]
   host:
     - python
     - pip
@@ -29,9 +36,7 @@ requirements:
     - ninja
     - numpy
     - pillow
-    - opencv >=4.6.0  # [(linux and x86_64) or (osx and x86_64)]
-    - py-opencv  # [not ((linux and x86_64) or (osx and x86_64))]
-    - py-opencv >=4.6.0  # [(linux and x86_64) or (osx and x86_64)]
+    - py-opencv >=4.6.0
     - pyclipper
     - python
     - python-bidi
@@ -39,8 +44,7 @@ requirements:
     - scikit-image
     - scipy
     - shapely
-    - pytorch  # [not ((linux and x86_64) or (osx and x86_64))]
-    - pytorch ==1.10.2  # [(linux and x86_64) or (osx and x86_64)]
+    - pytorch
     - torchvision >=0.5
 
 test:
