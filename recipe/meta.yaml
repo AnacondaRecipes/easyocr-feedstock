@@ -14,19 +14,13 @@ build:
   # torchvision currently isn't available on s390x and ppc64le
   skip: True  # [s390x or ppc64le]
   skip: True  # [py<37 or py>39]
-  script: {{ PYTHON }} -m pip install . -vvv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
   entry_points:
     - easyocr= easyocr.cli:main
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('libselinux') }}        # [linux]
-    - {{ cdt('libxdamage') }}        # [linux]
-    - {{ cdt('libxxf86vm') }}        # [linux]
-    - {{ cdt('libxext') }}           # [linux]
   host:
     - python
     - pip
@@ -75,3 +69,7 @@ about:
 extra:
   recipe-maintainers:
     - skupr-anaconda
+  skip-lints:
+    - missing_pip_check
+    - has_run_test_and_commands
+    - build_tools_must_be_in_build
