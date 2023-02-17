@@ -1,0 +1,75 @@
+{% set name = "EasyOCR" %}
+{% set version = "1.6.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/JaidedAI/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0ed5af2b739ce2303c5173d520b631df311d54a9aa58a80e09fe33d44c0a8115
+
+build:
+  number: 0
+  # torchvision currently isn't available on s390x and ppc64le
+  skip: True  # [s390x or ppc64le]
+  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  entry_points:
+    - easyocr= easyocr.cli:main
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - ninja
+    - numpy
+    - pillow
+    - py-opencv >=4.6.0
+    - pyclipper
+    - python
+    - python-bidi
+    - pyyaml
+    - scikit-image
+    - scipy
+    - shapely
+    - pytorch
+    - torchvision >=0.5
+
+test:
+  # Imports in run_test.py
+  #imports:
+  #  - easyocr
+  requires:
+    - pip
+  files:
+    - english.png
+  commands:
+    - run_test.sh   # [not win]
+    - run_test.py   # [not win]
+
+about:
+  home: https://www.jaided.ai/
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: End-to-End Multi-Lingual Optical Character Recognition (OCR) Solution
+  description: |
+    Ready-to-use OCR with 80+ supported languages and all popular writing
+    scripts including: Latin, Chinese, Arabic, Devanagari, Cyrillic, etc.
+
+  doc_url: https://github.com/JaidedAI/EasyOCR/blob/master/README.md
+  dev_url: https://github.com/JaidedAI/EasyOCR
+
+extra:
+  recipe-maintainers:
+    - skupr-anaconda
+  skip-lints:
+    - missing_pip_check
+    - has_run_test_and_commands
+    - build_tools_must_be_in_build
