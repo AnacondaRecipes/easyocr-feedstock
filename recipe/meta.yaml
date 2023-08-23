@@ -1,5 +1,5 @@
 {% set name = "EasyOCR" %}
-{% set version = "1.6.2" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/JaidedAI/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0ed5af2b739ce2303c5173d520b631df311d54a9aa58a80e09fe33d44c0a8115
+  sha256: 6f26c99ecfd3f715932e470836c2dd80fb55509df18955ff863f0212d19c23ad
 
 build:
   number: 0
   # torchvision currently isn't available on s390x and ppc64le.
   skip: True  # [s390x or ppc64le]
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - easyocr= easyocr.cli:main
 
@@ -27,19 +27,19 @@ requirements:
     - setuptools
     - wheel
   run:
-    - ninja
-    - numpy
-    - pillow
-    - py-opencv >=4.6.0
-    - pyclipper
     - python
-    - python-bidi
-    - pyyaml
-    - scikit-image
-    - scipy
-    - shapely
     - pytorch
     - torchvision >=0.5
+    - py-opencv >=4.6.0
+    - scipy
+    - numpy
+    - pillow
+    - scikit-image
+    - python-bidi
+    - pyyaml
+    - shapely
+    - pyclipper
+    - ninja
 
 test:
   # Imports in run_test.py
@@ -49,9 +49,6 @@ test:
     - pip
   files:
     - english.png
-  commands:
-    - run_test.sh   # [not win]
-    - run_test.py   # [not win]
 
 about:
   home: https://www.jaided.ai/
