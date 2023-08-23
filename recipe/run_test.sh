@@ -6,6 +6,7 @@ set -e
 # It's weird that ninja is needed because it's already in run and test/requires.
 # opencv-python-headless is needed only for tests, in run is used py-opencv.
 #- pip install ninja "opencv-python-headless<=4.5.4.60"
-pip check easyocr || true
+# Uncomment the following line if and when this can be resolved.
+# pip check easyocr
 
 easyocr --help
